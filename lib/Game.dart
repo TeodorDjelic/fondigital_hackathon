@@ -32,7 +32,7 @@ class GameState extends State<Game> {
   static const double playerHeight = 40;
   static const double playerWidth = 65;
 
-  static const double startingCollectibleHeight = 30;
+  static const double startingCollectibleHeight = 60;
 
   static const double collectibleHeight = 30;
   static const double collectibleWidth = 30;
