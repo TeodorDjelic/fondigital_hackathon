@@ -14,7 +14,7 @@ Future<void> main() async {
 
   ImageMap _imageMap = ImageMap();
 
-  await _imageMap.load(<String>['assets/apple.png', 'assets/car.png', 'assets/coffe.png', 'assets/chips.png', 'assets/fuel_can.png']);
+  await _imageMap.load(<String>['assets/bluebar.png', 'assets/linija.png', 'assets/bg2.png', 'assets/bg3.png', 'assets/car.png', 'assets/coffe.png', 'assets/chips.png', 'assets/fuel_can.png']);
 
   myWidget = Game(imageMap: _imageMap);
 
@@ -64,7 +64,7 @@ class HomePageWidget extends StatefulWidget {
 }
 
 class _HomePageWidgetState extends State<HomePageWidget> {
-  
+  var woo = true;
   var collapsed = true;
   var endGame = true;
   var earnedScore = 0;
@@ -95,7 +95,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     return RawKeyboardListener(
       autofocus: true,
       focusNode: FocusNode(),
-      onKey: (value) => {
+      onKey: (value) {
         if(value.isKeyPressed(LogicalKeyboardKey.arrowDown)){
           setState(() {
           endGame = false;
@@ -104,7 +104,20 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           earnedScore = myWidget.mws.getScore();
           }
           
-        )}
+
+          
+        );
+        };
+
+        if(value.isKeyPressed(LogicalKeyboardKey.f1)){
+          setState(() {
+            woo = !woo;
+          }
+          
+
+          
+        );
+        };
       },
       child: Scaffold(
         body: Container(
@@ -147,7 +160,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
-                            ))
+                            )
+                            ),
+                            Text('Score: ${myWidget.mws.getScore()}',
+                            style: TextStyle(
+                              color: Color(0xFFff7f1b),
+                              fontWeight: FontWeight.bold
+
+                            ),),
                       ],
                     ),
                   ),
@@ -189,7 +209,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             decoration: const BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage(
-                                    'assets/one_lane_street.png',
+                                    // 'assets/one_lane_street.png',
+                                    'assets/bg2.png',
                                   ),
                                   fit: BoxFit.cover),
                             ),
@@ -397,6 +418,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               //     MaterialPageRoute(
                               //         builder: (context) =>
                               //             TocenjeZavrsenoPage()));
+                              setState(() {
+                                endGame = false;
+          print('AYOOOO');
+          print(myWidget.mws.getScore());
+          earnedScore = myWidget.mws.getScore();
+                              });
                             },
                             child: Text(
                               'Odustani',
