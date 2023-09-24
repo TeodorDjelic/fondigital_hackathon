@@ -54,6 +54,9 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePageWidget extends StatefulWidget {
+
+  
+
   const HomePageWidget({Key? key}) : super(key: key);
 
   @override
@@ -61,8 +64,10 @@ class HomePageWidget extends StatefulWidget {
 }
 
 class _HomePageWidgetState extends State<HomePageWidget> {
+  
   var collapsed = true;
   var endGame = true;
+  var earnedScore = 0;
   @override
   void initState() {
     super.initState();
@@ -96,7 +101,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           endGame = false;
           print('AYOOOO');
           print(myWidget.mws.getScore());
-          
+          earnedScore = myWidget.mws.getScore();
           }
           
         )}
@@ -117,14 +122,27 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(8, 16, 8, 0),
                           child: Center(
-                            child: CircleAvatar(
+                            child: endGame? CircleAvatar(
                               maxRadius: 25,
                               backgroundImage: NetworkImage(
                                   'https://static.vecteezy.com/system/resources/previews/008/014/894/original/fuel-nozzle-icon-gas-station-icon-petroleum-fuel-pump-pump-nozzle-oil-dripping-symbol-vector.jpg'),
+                            ) : CircleAvatar(
+                              backgroundColor: Color(0xFFff7f1b),
+                              child: Icon(
+                              Icons.check,
+                              color: Colors.white,
                             ),
-                          ),
+
+                          )),
                         ),
-                        Text('ZAPOČNI TOČENJE',
+
+                        endGame ?Text('ZAPOČNI TOČENJE ',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            )) :
+                        Text('TOČENJE ZAVRŠENO',
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -158,7 +176,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       ),
                       child:  GestureDetector(
                           onPanDown: (e) {
-                            const double sredinaEkrana = 100;
+                            const double sredinaEkrana = 200;
     
                             if (e.globalPosition.dx >= sredinaEkrana) {
                               myWidget.mws.igrac.udesno();
@@ -177,7 +195,85 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             ),
                             child: myWidget,
                           )), 
-                    ): Placeholder(),
+                    ): Container(
+                      child: Column(
+                        children: [
+                        SizedBox(
+                          height: 120,
+                          child: Expanded(
+                            child: Container(
+                              decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(30),
+                            ),
+                            
+                          ),
+                              child: Image.asset('assets/BackgroundCards.jpg')),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(10,25,10,0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(30),
+                            )),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Coins: 17 + ',
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFFff7f1b)
+                              ),),
+                              Text('${earnedScore}c'
+                              ,
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFFff7f1b)
+                              ))
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top:20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                            
+                              ElevatedButton.icon(
+                                icon: Icon(Icons.money,
+                                color: Color(0xFFff7f1b),),
+                                onPressed: () {},
+                                 label: Text('KUPONI',
+                                 style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                 ),),
+                                ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top:20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                            
+                              ElevatedButton.icon(
+                                icon: Icon(Icons.monetization_on_outlined),
+                                onPressed: () {},
+                                 label: Text('Stanje Loyalty poena'),
+                                ),
+                            ],
+                          ),
+                        ),
+                        
+                      ]),
+                    ),
                   ),
                 ),
                 Expanded(
