@@ -9,7 +9,8 @@ import 'Figura.dart';
 
 class PadajucaFigura extends Figura {
   static final double limitY = 50;
-  static final String pathDoSlikePadajuceFigure = 'assets/apple.png';
+  // static final String pathDoSlikePadajuceFigure = 'assets/apple.png';
+  static final List<String> pathovi=['chips', 'fuel_can', 'coffe'];
 
   static const double fallingSpeed = 90;
   static const double screenHeight = 320;
@@ -23,7 +24,7 @@ class PadajucaFigura extends Figura {
   PadajucaFigura(double x0, double y0, Size size, ImageMap imageMap,
       IgracFigura igracFigura)
       : igrac = igracFigura,
-        super(pathDoSlikePadajuceFigure, x0, y0, size, imageMap) {
+        super('assets/${pathovi[new Random().nextInt(pathovi.length)]}.png', x0, y0, size, imageMap) {
     Vx = 0;
     Vy = fallingSpeed;
     startingY = y0;

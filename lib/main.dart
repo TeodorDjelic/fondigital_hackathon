@@ -14,7 +14,7 @@ Future<void> main() async {
 
   ImageMap _imageMap = ImageMap();
 
-  await _imageMap.load(<String>['assets/apple.png', 'assets/car.png']);
+  await _imageMap.load(<String>['assets/apple.png', 'assets/car.png', 'assets/coffe.png', 'assets/chips.png', 'assets/fuel_can.png']);
 
   myWidget = Game(imageMap: _imageMap);
 
