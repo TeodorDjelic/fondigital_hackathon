@@ -14,7 +14,7 @@ Future<void> main() async {
 
   ImageMap _imageMap = ImageMap();
 
-  await _imageMap.load(<String>['assets/bluebar.png', 'assets/linija.png', 'assets/bg2.png', 'assets/bg3.png', 'assets/car.png', 'assets/coffe.png', 'assets/chips.png', 'assets/fuel_can.png']);
+  await _imageMap.load(<String>['assets/bluebar.png', 'assets/linija.png', 'assets/bg2.png', 'assets/bg3.png', 'assets/bg4.png', 'assets/car.png', 'assets/coffe.png', 'assets/chips.png', 'assets/fuel_can.png']);
 
   myWidget = Game(imageMap: _imageMap);
 
@@ -109,7 +109,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         );
         };
 
-        if(value.isKeyPressed(LogicalKeyboardKey.f1)){
+        if(value.isKeyPressed(LogicalKeyboardKey.keyV)){
           setState(() {
             woo = !woo;
           }
@@ -136,7 +136,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           padding: const EdgeInsets.fromLTRB(8, 16, 8, 0),
                           child: Center(
                             child: endGame? CircleAvatar(
-                              maxRadius: 25,
+                              maxRadius: 20,
                               backgroundImage: NetworkImage(
                                   'https://static.vecteezy.com/system/resources/previews/008/014/894/original/fuel-nozzle-icon-gas-station-icon-petroleum-fuel-pump-pump-nozzle-oil-dripping-symbol-vector.jpg'),
                             ) : CircleAvatar(

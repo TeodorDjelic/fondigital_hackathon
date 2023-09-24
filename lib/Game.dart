@@ -33,7 +33,7 @@ class GameState extends State<Game> {
 
   static const List<double> lanes = [110, 160, 210];
   static const int startingPlayerLane = 2;
-  static const double startingPlayerHeight = 200;
+  static const double startingPlayerHeight = 250;
 
   static const double playerHeight = 40;
   static const double playerWidth = 65;
