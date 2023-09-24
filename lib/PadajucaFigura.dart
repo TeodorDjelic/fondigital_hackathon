@@ -14,8 +14,11 @@ class PadajucaFigura extends Figura {
   static const double fallingSpeed = 90;
   static const double screenHeight = 320;
 
+
+
   IgracFigura igrac;
   double startingY = 0;
+  bool zavrsen=false;
 
   PadajucaFigura(double x0, double y0, Size size, ImageMap imageMap,
       IgracFigura igracFigura)
@@ -29,11 +32,14 @@ class PadajucaFigura extends Figura {
   @override
   update(double dt) {
     super.update(dt);
+    if(position.dy<this.size.height/2) this.visible=false;
+    else if(!zavrsen) this.visible=true;
     if (this.visible) {
       if (igrac.checkCollision(this)) {
         this.visible = false;
         GameState.score++;
         print(GameState.score);
+        zavrsen=true;
       }
     }
     if (position.dy >= screenHeight) {
@@ -41,6 +47,7 @@ class PadajucaFigura extends Figura {
           -GameState.numberOfCollectibles * GameState.baseCollectibleHeighGap);
       Random random = Random();
       this.visible = true;
+      zavrsen=false;
     }
   }
 }

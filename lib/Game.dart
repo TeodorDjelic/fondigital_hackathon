@@ -25,6 +25,10 @@ class GameState extends State<Game> {
 
   static int score = 0;
 
+  int getScore(){
+    return score;
+  }
+
   static const List<double> lanes = [110, 160, 210];
   static const int startingPlayerLane = 2;
   static const double startingPlayerHeight = 200;
@@ -33,7 +37,6 @@ class GameState extends State<Game> {
   static const double playerWidth = 65;
 
   static const double startingCollectibleHeight = 60;
-
   static const double collectibleHeight = 30;
   static const double collectibleWidth = 30;
 
@@ -62,10 +65,12 @@ class GameState extends State<Game> {
       double y = startingCollectibleHeight -
           (i * baseCollectibleHeighGap +
               (2 * random.nextDouble() - 1) * maxCollectibleHeightGapDeviation);
-      lista.add(new PadajucaFigura(lanes[lane], y,
+      lista.add(PadajucaFigura(lanes[lane], y,
           Size(collectibleWidth, collectibleHeight), imageMap, igrac));
       rootNode.addChild(lista[i]);
     }
+
+    
   }
 
   @override

@@ -62,7 +62,7 @@ class HomePageWidget extends StatefulWidget {
 
 class _HomePageWidgetState extends State<HomePageWidget> {
   var collapsed = true;
-
+  var endGame = true;
   @override
   void initState() {
     super.initState();
@@ -87,226 +87,242 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     //   },
     //
     //   child:
-    return Scaffold(
-      body: Container(
-        color: Color(0xFF083694),
-        child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                flex: 1,
-                child: Container(
-                  color: Color(0xFF083694),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
-                        child: Center(
-                          child: CircleAvatar(
-                            maxRadius: 30,
-                            backgroundImage: NetworkImage(
-                                'https://static.vecteezy.com/system/resources/previews/008/014/894/original/fuel-nozzle-icon-gas-station-icon-petroleum-fuel-pump-pump-nozzle-oil-dripping-symbol-vector.jpg'),
-                          ),
-                        ),
-                      ),
-                      Text('ZAPOČNI TOČENJE',
-                          style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ))
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: collapsed ? 5 : 4,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
+    return RawKeyboardListener(
+      autofocus: true,
+      focusNode: FocusNode(),
+      onKey: (value) => {
+        if(value.isKeyPressed(LogicalKeyboardKey.arrowDown)){
+          setState(() {
+          endGame = false;
+          print('AYOOOO');
+          print(myWidget.mws.getScore());
+          
+          }
+          
+        )}
+      },
+      child: Scaffold(
+        body: Container(
+          color: Color(0xFF083694),
+          child: SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  flex: 1,
                   child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.grey,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color(0xFF083694),
-                          blurRadius: 2.0,
-                          spreadRadius: 0.0,
-                          offset: Offset(
-                              2.0, 2.0), // shadow direction: bottom right
-                        )
-                      ],
-                    ),
-                    child: GestureDetector(
-                        onPanDown: (e) {
-                          const double sredinaEkrana = 100;
-
-                          if (e.globalPosition.dx >= sredinaEkrana) {
-                            myWidget.mws.igrac.udesno();
-                          } else {
-                            myWidget.mws.igrac.ulevo();
-                          }
-                        },
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage(
-                                  'assets/one_lane_street.png',
-                                ),
-                                fit: BoxFit.cover),
-                          ),
-                          child: myWidget,
-                        )),
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: collapsed ? 1 : 3,
-                child: Container(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(30),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey,
-                              blurRadius: 2.0,
-                              spreadRadius: 0.0,
-                              offset: Offset(
-                                  2.0, 2.0), // shadow direction: bottom right
-                            )
-                          ],
-                        ),
-                        child: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                collapsed = !collapsed;
-                              });
-                            },
-                            icon: collapsed
-                                ? Icon(Icons.arrow_upward)
-                                : Icon(Icons.arrow_downward)),
-                      ),
-                      collapsed
-                          ? SizedBox(
-                              height: 0,
-                            )
-                          : Container(
-                              margin: EdgeInsets.fromLTRB(0, 15, 0, 15),
-                              child: Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: Column(children: [
-                                  Align(
-                                    alignment: Alignment.topLeft,
-                                    child: Text('Benzinska stanica',
-                                        textAlign: TextAlign.start,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w400,
-                                          color: Colors.grey,
-                                        )),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.topLeft,
-                                    child: Text('Milentija Popovica 1, Beograd',
-                                        textAlign: TextAlign.start,
-                                        style: TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black,
-                                        )),
-                                  ),
-                                  Divider(),
-                                  Align(
-                                    alignment: Alignment.topLeft,
-                                    child: Text('Točiono mesto',
-                                        textAlign: TextAlign.start,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w400,
-                                          color: Colors.grey,
-                                        )),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.topLeft,
-                                    child: Text('Točiono mesto 4',
-                                        textAlign: TextAlign.start,
-                                        style: TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black,
-                                        )),
-                                  ),
-                                  Divider(),
-                                ]),
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(30),
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey,
-                                    blurRadius: 2.0,
-                                    spreadRadius: 0.0,
-                                    offset: Offset(2.0,
-                                        2.0), // shadow direction: bottom right
-                                  )
-                                ],
-                              ),
+                    color: Color(0xFF083694),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(8, 16, 8, 0),
+                          child: Center(
+                            child: CircleAvatar(
+                              maxRadius: 25,
+                              backgroundImage: NetworkImage(
+                                  'https://static.vecteezy.com/system/resources/previews/008/014/894/original/fuel-nozzle-icon-gas-station-icon-petroleum-fuel-pump-pump-nozzle-oil-dripping-symbol-vector.jpg'),
                             ),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(10, 0, 10, 15),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          border: Border.all(
-                            color: Colors.grey,
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(30),
                           ),
                         ),
-                        child: TextButton(
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        TocenjeZavrsenoPage()));
-                          },
-                          child: Text(
-                            'Odustani',
+                        Text('ZAPOČNI TOČENJE',
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.w400,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ))
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: collapsed ? 5 : 4,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child:endGame ? Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.grey,
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xFF083694),
+                            blurRadius: 2.0,
+                            spreadRadius: 0.0,
+                            offset: Offset(
+                                2.0, 2.0), // shadow direction: bottom right
+                          )
+                        ],
+                      ),
+                      child:  GestureDetector(
+                          onPanDown: (e) {
+                            const double sredinaEkrana = 100;
+    
+                            if (e.globalPosition.dx >= sredinaEkrana) {
+                              myWidget.mws.igrac.udesno();
+                            } else {
+                              myWidget.mws.igrac.ulevo();
+                            }
+                            
+                          },
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage(
+                                    'assets/one_lane_street.png',
+                                  ),
+                                  fit: BoxFit.cover),
+                            ),
+                            child: myWidget,
+                          )), 
+                    ): Placeholder(),
+                  ),
+                ),
+                Expanded(
+                  flex: collapsed ? 1 : 3,
+                  child: Container(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(30),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey,
+                                blurRadius: 2.0,
+                                spreadRadius: 0.0,
+                                offset: Offset(
+                                    2.0, 2.0), // shadow direction: bottom right
+                              )
+                            ],
+                          ),
+                          child: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  collapsed = !collapsed;
+                                });
+                              },
+                              icon: collapsed
+                                  ? Icon(Icons.arrow_upward)
+                                  : Icon(Icons.arrow_downward)),
+                        ),
+                        collapsed
+                            ? SizedBox(
+                                height: 0,
+                              )
+                            : Container(
+                                margin: EdgeInsets.fromLTRB(0, 15, 0, 15),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Column(children: [
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Text('Benzinska stanica',
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.grey,
+                                          )),
+                                    ),
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Text('Milentija Popovica 1, Beograd',
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                          )),
+                                    ),
+                                    Divider(),
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Text('Točiono mesto',
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.grey,
+                                          )),
+                                    ),
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Text('Točiono mesto 4',
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                          )),
+                                    ),
+                                    Divider(),
+                                  ]),
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(30),
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey,
+                                      blurRadius: 2.0,
+                                      spreadRadius: 0.0,
+                                      offset: Offset(2.0,
+                                          2.0), // shadow direction: bottom right
+                                    )
+                                  ],
+                                ),
+                              ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(10, 0, 10, 15),
+                          decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            border: Border.all(
+                              color: Colors.grey,
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(30),
+                            ),
+                          ),
+                          child: TextButton(
+                            onPressed: () {
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) =>
+                              //             TocenjeZavrsenoPage()));
+                            },
+                            child: Text(
+                              'Odustani',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                    decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
+                        )),
                   ),
-                  decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                      )),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),
