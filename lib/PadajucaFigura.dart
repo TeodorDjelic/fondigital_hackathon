@@ -2,33 +2,31 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fonis_hackathon/Game.dart';
-import 'package:fonis_hackathon/IgracFigura.dart';
+import 'package:fondigital_hackathon/Game.dart';
+import 'package:fondigital_hackathon/IgracFigura.dart';
 import 'package:spritewidget/spritewidget.dart';
 import 'Figura.dart';
 
 class PadajucaFigura extends Figura {
   static final double limitY = 50;
   // static final String pathDoSlikePadajuceFigure = 'assets/apple.png';
-  static final List<String> pathovi=['chips', 'fuel_can', 'coffe'];
+  static final List<String> pathovi = ['chips', 'fuel_can', 'coffe'];
 
   static const double fallingSpeed = 150;
   static const double screenHeight = 320;
 
-
-  double x=0, y=0;
-
-
+  double x = 0, y = 0;
 
   IgracFigura igrac;
-  bool zavrsen=false;
+  bool zavrsen = false;
 
   PadajucaFigura(double x0, double y0, Size size, ImageMap imageMap,
       IgracFigura igracFigura)
       : igrac = igracFigura,
-        super('assets/${pathovi[new Random().nextInt(pathovi.length)]}.png', x0, y0, size, imageMap) {
-          x=x0;
-          y=y0;
+        super('assets/${pathovi[new Random().nextInt(pathovi.length)]}.png', x0,
+            y0, size, imageMap) {
+    x = x0;
+    y = y0;
     Vx = 0;
     Vy = fallingSpeed;
   }
@@ -36,18 +34,19 @@ class PadajucaFigura extends Figura {
   @override
   update(double dt) {
     super.update(dt);
-    x+=Vx*dt;
-    y+=Vy*dt;
+    x += Vx * dt;
+    y += Vy * dt;
     // double tempX=160+y*5/320*(x-160);
     // position = Offset(x, y);
-    if(position.dy<this.size.height/2) this.visible=false;
-    else if(!zavrsen) this.visible=true;
+    if (position.dy < this.size.height / 2)
+      this.visible = false;
+    else if (!zavrsen) this.visible = true;
     if (this.visible) {
       if (igrac.checkCollision(this)) {
         this.visible = false;
         GameState.score++;
         print(GameState.score);
-        zavrsen=true;
+        zavrsen = true;
       }
     }
     if (position.dy >= screenHeight) {
@@ -55,7 +54,7 @@ class PadajucaFigura extends Figura {
           -GameState.numberOfCollectibles * GameState.baseCollectibleHeighGap);
       // Random random = Random();
       this.visible = true;
-      zavrsen=false;
+      zavrsen = false;
     }
   }
 }

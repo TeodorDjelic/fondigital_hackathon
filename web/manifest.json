@@ -1,6 +1,6 @@
 {
-    "name": "fonis_hackathon",
-    "short_name": "fonis_hackathon",
+    "name": "fondigital_hackathon",
+    "short_name": "fondigital_hackathon",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -1,10 +1,10 @@
 import 'dart:math';
 // import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:fonis_hackathon/IgracFigura.dart';
-import 'package:fonis_hackathon/PadajucaFigura.dart';
-import 'package:fonis_hackathon/LinijaFigura.dart';
-import 'package:fonis_hackathon/BarFigura.dart';
+import 'package:fondigital_hackathon/IgracFigura.dart';
+import 'package:fondigital_hackathon/PadajucaFigura.dart';
+import 'package:fondigital_hackathon/LinijaFigura.dart';
+import 'package:fondigital_hackathon/BarFigura.dart';
 import 'package:spritewidget/spritewidget.dart';
 
 class Game extends StatefulWidget {
@@ -27,7 +27,7 @@ class GameState extends State<Game> {
 
   static int score = 0;
 
-  int getScore(){
+  int getScore() {
     return score;
   }
 
@@ -70,8 +70,10 @@ class GameState extends State<Game> {
       lista.add(PadajucaFigura(lanes[lane], y,
           Size(collectibleWidth, collectibleHeight), imageMap, igrac));
       rootNode.addChild(lista[i]);
-      rootNode.addChild(new LinijaFigura(135, 290-i*60, Size(5, 30), imageMap));
-      rootNode.addChild(new LinijaFigura(185, 290-i*60, Size(5, 30), imageMap));
+      rootNode
+          .addChild(new LinijaFigura(135, 290 - i * 60, Size(5, 30), imageMap));
+      rootNode
+          .addChild(new LinijaFigura(185, 290 - i * 60, Size(5, 30), imageMap));
     }
     rootNode.addChild(BarFigura(0, 0, Size(100, 5), imageMap));
     rootNode.addChild(BarFigura(0, 320, Size(100, 5), imageMap));

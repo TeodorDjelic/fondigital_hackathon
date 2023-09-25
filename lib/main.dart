@@ -14,7 +14,17 @@ Future<void> main() async {
 
   ImageMap _imageMap = ImageMap();
 
-  await _imageMap.load(<String>['assets/bluebar.png', 'assets/linija.png', 'assets/bg2.png', 'assets/bg3.png', 'assets/bg4.png', 'assets/car.png', 'assets/coffe.png', 'assets/chips.png', 'assets/fuel_can.png']);
+  await _imageMap.load(<String>[
+    'assets/bluebar.png',
+    'assets/linija.png',
+    'assets/bg2.png',
+    'assets/bg3.png',
+    'assets/bg4.png',
+    'assets/car.png',
+    'assets/coffe.png',
+    'assets/chips.png',
+    'assets/fuel_can.png'
+  ]);
 
   myWidget = Game(imageMap: _imageMap);
 
@@ -54,9 +64,6 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePageWidget extends StatefulWidget {
-
-  
-
   const HomePageWidget({Key? key}) : super(key: key);
 
   @override
@@ -96,28 +103,22 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       autofocus: true,
       focusNode: FocusNode(),
       onKey: (value) {
-        if(value.isKeyPressed(LogicalKeyboardKey.arrowDown)){
+        if (value.isKeyPressed(LogicalKeyboardKey.arrowDown)) {
           setState(() {
-          endGame = false;
-          print('AYOOOO');
-          print(myWidget.mws.getScore());
-          earnedScore = myWidget.mws.getScore();
-          }
-          
+            endGame = false;
+            print('AYOOOO');
+            print(myWidget.mws.getScore());
+            earnedScore = myWidget.mws.getScore();
+          });
+        }
+        ;
 
-          
-        );
-        };
-
-        if(value.isKeyPressed(LogicalKeyboardKey.keyV)){
+        if (value.isKeyPressed(LogicalKeyboardKey.keyV)) {
           setState(() {
             woo = !woo;
-          }
-          
-
-          
-        );
-        };
+          });
+        }
+        ;
       },
       child: Scaffold(
         body: Container(
@@ -135,39 +136,39 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(8, 16, 8, 0),
                           child: Center(
-                            child: endGame? CircleAvatar(
-                              maxRadius: 20,
-                              backgroundImage: NetworkImage(
-                                  'https://static.vecteezy.com/system/resources/previews/008/014/894/original/fuel-nozzle-icon-gas-station-icon-petroleum-fuel-pump-pump-nozzle-oil-dripping-symbol-vector.jpg'),
-                            ) : CircleAvatar(
-                              backgroundColor: Color(0xFFff7f1b),
-                              child: Icon(
-                              Icons.check,
-                              color: Colors.white,
-                            ),
-
-                          )),
+                              child: endGame
+                                  ? CircleAvatar(
+                                      maxRadius: 20,
+                                      backgroundImage: NetworkImage(
+                                          'https://static.vecteezy.com/system/resources/previews/008/014/894/original/fuel-nozzle-icon-gas-station-icon-petroleum-fuel-pump-pump-nozzle-oil-dripping-symbol-vector.jpg'),
+                                    )
+                                  : CircleAvatar(
+                                      backgroundColor: Color(0xFFff7f1b),
+                                      child: Icon(
+                                        Icons.check,
+                                        color: Colors.white,
+                                      ),
+                                    )),
                         ),
-
-                        endGame ?Text('ZAPOČNI TOČENJE ',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            )) :
-                        Text('TOČENJE ZAVRŠENO',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            )
-                            ),
-                            Text('Score: ${myWidget.mws.getScore()}',
-                            style: TextStyle(
+                        endGame
+                            ? Text('ZAPOČNI TOČENJE ',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ))
+                            : Text('TOČENJE ZAVRŠENO',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                )),
+                        Text(
+                          'Score: ${myWidget.mws.getScore()}',
+                          style: TextStyle(
                               color: Color(0xFFff7f1b),
-                              fontWeight: FontWeight.bold
-
-                            ),),
+                              fontWeight: FontWeight.bold),
+                        ),
                       ],
                     ),
                   ),
@@ -176,125 +177,128 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   flex: collapsed ? 5 : 4,
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 10),
-                    child:endGame ? Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.grey,
-                        ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(30),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0xFF083694),
-                            blurRadius: 2.0,
-                            spreadRadius: 0.0,
-                            offset: Offset(
-                                2.0, 2.0), // shadow direction: bottom right
-                          )
-                        ],
-                      ),
-                      child:  GestureDetector(
-                          onPanDown: (e) {
-                            const double sredinaEkrana = 200;
-    
-                            if (e.globalPosition.dx >= sredinaEkrana) {
-                              myWidget.mws.igrac.udesno();
-                            } else {
-                              myWidget.mws.igrac.ulevo();
-                            }
-                            
-                          },
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage(
-                                    // 'assets/one_lane_street.png',
-                                    'assets/bg2.png',
+                    child: endGame
+                        ? Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.grey,
+                              ),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(30),
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color(0xFF083694),
+                                  blurRadius: 2.0,
+                                  spreadRadius: 0.0,
+                                  offset: Offset(2.0,
+                                      2.0), // shadow direction: bottom right
+                                )
+                              ],
+                            ),
+                            child: GestureDetector(
+                                onPanDown: (e) {
+                                  const double sredinaEkrana = 200;
+
+                                  if (e.globalPosition.dx >= sredinaEkrana) {
+                                    myWidget.mws.igrac.udesno();
+                                  } else {
+                                    myWidget.mws.igrac.ulevo();
+                                  }
+                                },
+                                child: Container(
+                                  decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                          // 'assets/one_lane_street.png',
+                                          'assets/bg2.png',
+                                        ),
+                                        fit: BoxFit.cover),
                                   ),
-                                  fit: BoxFit.cover),
-                            ),
-                            child: myWidget,
-                          )), 
-                    ): Container(
-                      child: Column(
-                        children: [
-                        SizedBox(
-                          height: 120,
-                          child: Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(30),
-                            ),
-                            
-                          ),
-                              child: Image.asset('assets/BackgroundCards.jpg')),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(10,25,10,0),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(30),
-                            )),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text('Coins: 17 + ',
-                              style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFFff7f1b)
-                              ),),
-                              Text('${earnedScore}c'
-                              ,
-                              style: TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFFff7f1b)
-                              ))
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top:20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                            
-                              ElevatedButton.icon(
-                                icon: Icon(Icons.money,
-                                color: Color(0xFFff7f1b),),
-                                onPressed: () {},
-                                 label: Text('KUPONI',
-                                 style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                 ),),
+                                  child: myWidget,
+                                )),
+                          )
+                        : Container(
+                            child: Column(children: [
+                              SizedBox(
+                                height: 120,
+                                child: Expanded(
+                                  child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(30),
+                                        ),
+                                      ),
+                                      child: Image.asset(
+                                          'assets/BackgroundCards.jpg')),
                                 ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top:20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                            
-                              ElevatedButton.icon(
-                                icon: Icon(Icons.monetization_on_outlined),
-                                onPressed: () {},
-                                 label: Text('Stanje Loyalty poena'),
+                              ),
+                              Container(
+                                margin: EdgeInsets.fromLTRB(10, 25, 10, 0),
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    )),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Coins: 17 + ',
+                                      style: TextStyle(
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xFFff7f1b)),
+                                    ),
+                                    Text('${earnedScore}c',
+                                        style: TextStyle(
+                                            fontSize: 30,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color(0xFFff7f1b)))
+                                  ],
                                 ),
-                            ],
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 20),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    ElevatedButton.icon(
+                                      icon: Icon(
+                                        Icons.money,
+                                        color: Color(0xFFff7f1b),
+                                      ),
+                                      onPressed: () {},
+                                      label: Text(
+                                        'KUPONI',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 20),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    ElevatedButton.icon(
+                                      icon:
+                                          Icon(Icons.monetization_on_outlined),
+                                      onPressed: () {},
+                                      label: Text('Stanje Loyalty poena'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ]),
                           ),
-                        ),
-                        
-                      ]),
-                    ),
                   ),
                 ),
                 Expanded(
@@ -352,13 +356,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     ),
                                     Align(
                                       alignment: Alignment.topLeft,
-                                      child: Text('Milentija Popovica 1, Beograd',
-                                          textAlign: TextAlign.start,
-                                          style: TextStyle(
-                                            fontSize: 22,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black,
-                                          )),
+                                      child:
+                                          Text('Milentija Popovica 1, Beograd',
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black,
+                                              )),
                                     ),
                                     Divider(),
                                     Align(
@@ -420,9 +425,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               //             TocenjeZavrsenoPage()));
                               setState(() {
                                 endGame = false;
-          print('AYOOOO');
-          print(myWidget.mws.getScore());
-          earnedScore = myWidget.mws.getScore();
+                                print('AYOOOO');
+                                print(myWidget.mws.getScore());
+                                earnedScore = myWidget.mws.getScore();
                               });
                             },
                             child: Text(

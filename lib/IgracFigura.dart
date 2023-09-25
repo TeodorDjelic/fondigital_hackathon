@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fonis_hackathon/Game.dart';
-import 'package:fonis_hackathon/PadajucaFigura.dart';
+import 'package:fondigital_hackathon/Game.dart';
+import 'package:fondigital_hackathon/PadajucaFigura.dart';
 import 'package:spritewidget/spritewidget.dart';
 import 'Figura.dart';
 

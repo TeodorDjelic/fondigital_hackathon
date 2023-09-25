@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="fonis_hackathon"
+        android:label="fondigital_hackathon"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
