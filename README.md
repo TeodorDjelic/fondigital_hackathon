@@ -6,7 +6,7 @@ Crossplatform solution to a problem provided by [NIS](https://www.nis.rs/en/) wh
 
 ## Problem
 
-Make NIS' [Drive Go](https://www.nisgazprom.rs/en/petrol-stations/applications/drive-go/) application more interactive and fun while waiting for the car's fuel tank to fill up, which can take from 30 seconds up to 3 minutes. Try to also make it rewarding for the  user.
+Make NIS' [Drive Go](https://www.nisgazprom.rs/en/petrol-stations/applications/drive-go/) application more interactive and fun while waiting for the car's fuel tank to fill up, which can take from 30 seconds up to 3 minutes. Try to also make it rewarding for the user.
 
 ## Our solution
 
